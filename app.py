@@ -3,18 +3,18 @@ from flask_cors import CORS
 import redis
 import string
 from urllib.parse import urlparse
+from config import Config  # ✅ 使用配置
 
 app = Flask(__name__)
 CORS(app)
 
 # ========================
-# Redis 配置
+# Redis 配置（已工程化）
 # ========================
 try:
     r = redis.Redis(
-        host='localhost',
-        port=6379,
-        password=None,
+        host=Config.REDIS_HOST,
+        port=Config.REDIS_PORT,
         decode_responses=True
     )
     r.ping()
